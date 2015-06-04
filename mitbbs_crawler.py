@@ -20,7 +20,9 @@ try:
     items = re.findall(pattern,content)
 
     for item in items:
-    	print item
+    	#print item
+        p = re.compile('<[^>]+>')
+        print p.sub("", item)
     #print content
 except urllib2.URLError, e:
     if hasattr(e,"code"):
