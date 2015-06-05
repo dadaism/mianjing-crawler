@@ -13,29 +13,38 @@ urls = [ #'http://www.1point3acres.com/bbs/forum-145-3.html',
 
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 headers = { 'User-Agent' : user_agent }
+lastDayDateTime = datetime.datetime.now() - timedelta(days = 1)
+yesterday = lastDayDateTime.strftime('%Y-%-m-%-d')
 
 def process_single_post(url):
     request = urllib2.Request(url, headers = headers)
     response = urllib2.urlopen(request).read()
-    content = unicode(response,'GBK').encode('UTF-8')
+    content = response.decode('GBK','ignore').encode('UTF-8')
+    #unicode(response,'GBK').encode('UTF-8')
 
     ''' extract title '''
-    #p = re.compile(r'<strong>同主题阅读：(.*?)</strong>')
-    #titles = re.search(p, content)
-    #title = titles.group(1)
-    #print title
+    p = re.compile(r'<span id="thread_subject">(.*?)</span>')
+    titles = re.search(p, content)
+    title = titles.group()
+    print title
     
     ''' extract content '''
-    #p = re.compile(r'<td\s+class="jiawenzhang-type">(.*?)--.*?</td>', flags=re.DOTALL)
-    #items = re.search(p, content)
-    #item = items.group(1)
-    #item = re.sub(r'<[^>]*>', '', item)  # strip html tag
-    #item = re.sub(r'&nbsp;', '', item)
-
+    p = re.compile(r'<td class="t_f".*?>(.*?)</td>', flags=re.DOTALL)
+    items = re.search(p, content)
+    if items is None:
+        return
+    item = items.group(1)
+    #print item
+    #p = re.compile()
+    item = re.sub(r'<font class="jammer">.*?font>', '', item)
+    item = re.sub(r'<div>.*?<h3><strong>.*?</span>.*?</div>', '', item, flags=re.DOTALL)# strip wanning
+    item = re.sub(r'<[^>]*>', '', item)  # strip html tag
+    item = re.sub(r'&nbsp;', '', item)
+    #print item
     print    
-    print '原帖地址：<a href="'+url+'" target="_blank">mitbbs</a>'
+    print '原帖地址：<a href="'+url+'" target="_blank">一亩三分地</a>'
     print 
-    #print '\n'.join( item.split('\n')[5:] )
+    print '\n'.join( item.split('\n') )
     print
     #print item
     #print content
@@ -58,18 +67,33 @@ for url in urls:
             p = re.compile('<a href="(.*?)"')
             links = re.search(p, item)
             link = links.group(1)
-            print link
+            link = re.sub(r'amp;', '', link)
+            #print link
 
             ''' extract title '''
             p = re.compile(r'<a.*?class="s xst">(.*?)</a>', flags=re.DOTALL)
             titles = re.search(p, item)
             title = titles.group(1)
-            print title
+            #print title
 
             ''' extract date '''
+            p = re.compile('<em>.*?<span>.*?<span title="(.*?)">.*?</span>', flags=re.DOTALL)
+            dates = re.search(p, item)
+            date = ""
+            #print dates
+            if dates is not None:
+                date = dates.group(1)
+            else:
+                continue
+            #print date
+            #print yesterday
+            if yesterday == date:
+                #print title
+                #print link
+                #print date
+                #print
+                process_single_post(link)
             
-        
-            print 
         #print content
     except urllib2.URLError, e:
         if hasattr(e,"code"):
