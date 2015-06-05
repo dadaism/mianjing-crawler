@@ -5,8 +5,8 @@ import re
 import datetime
 from datetime import timedelta
 
-urls = [ #'http://www.1point3acres.com/bbs/forum-145-3.html',
-         #'http://www.1point3acres.com/bbs/forum-145-2.html',
+urls = [ 'http://www.1point3acres.com/bbs/forum-145-3.html',
+         'http://www.1point3acres.com/bbs/forum-145-2.html',
          'http://www.1point3acres.com/bbs/forum-145-1.html'
        ]
 
@@ -25,7 +25,7 @@ def process_single_post(url):
     ''' extract title '''
     p = re.compile(r'<span id="thread_subject">(.*?)</span>')
     titles = re.search(p, content)
-    title = titles.group()
+    title = titles.group(1)
     print title
     
     ''' extract content '''
@@ -36,14 +36,17 @@ def process_single_post(url):
     item = items.group(1)
     #print item
     #p = re.compile()
-    item = re.sub(r'<font class="jammer">.*?font>', '', item)
+    item = re.sub(r'<font class="jammer">.*?/font>', '', item) # strip jammer
     item = re.sub(r'<div>.*?<h3><strong>.*?</span>.*?</div>', '', item, flags=re.DOTALL)# strip wanning
     item = re.sub(r'<[^>]*>', '', item)  # strip html tag
-    item = re.sub(r'&nbsp;', '', item)
+    item = re.sub(r'&amp;', '', item) # strip nothing
+    item = re.sub(r'&nbsp;', '', item) # strip whitespace
+    item = re.sub(r'&gt;', '>', item) # convert >
+    item = re.sub(r'&lt;', '<', item) # convert <
+    item = re.sub(r'&quot;', '"', item) # convert "
     #print item
     print    
     print '原帖地址：<a href="'+url+'" target="_blank">一亩三分地</a>'
-    print 
     print '\n'.join( item.split('\n') )
     print
     #print item
