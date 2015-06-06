@@ -25,6 +25,10 @@ def process_single_post(url):
     ''' extract title '''
     p = re.compile(r'<span id="thread_subject">(.*?)</span>')
     titles = re.search(p, content)
+    if titles is None:
+        print url
+        print
+        return
     title = titles.group(1)
     print title
     
