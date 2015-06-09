@@ -36,6 +36,7 @@ def process_single_post(url):
     p = re.compile(r'<td class="t_f".*?>(.*?)</td>', flags=re.DOTALL)
     items = re.search(p, content)
     if items is None:
+        print "#### Lack of permission ####"
         return
     item = items.group(1)
     #print item
