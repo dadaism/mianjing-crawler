@@ -71,7 +71,7 @@ for url in urls:
             date = re.search(p, item).group(1)
             #print date
 
-            mj_pattern = re.compile('(.*?面.*?\s)|(.*?on\s?site.*?\s)')
+            mj_pattern = re.compile('(.*?面.*?\s)|(.*?on\s?site.*?\s)|(interview)', re.IGNORECASE)
             tmp = re.findall(mj_pattern,title)
             #if tmp:
             #    print title, date
