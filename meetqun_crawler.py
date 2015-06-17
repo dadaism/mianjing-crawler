@@ -5,10 +5,10 @@ import re
 import datetime
 from datetime import timedelta
 
-urls = [ 'http://www.mitbbs.com/bbsdoc1/JobHunting_301_0.html',
-         'http://www.mitbbs.com/bbsdoc1/JobHunting_201_0.html',
-         'http://www.mitbbs.com/bbsdoc1/JobHunting_101_0.html',
-         'http://www.mitbbs.com/bbsdoc1/JobHunting_1_0.html'
+urls = [ 'http://www.meetqun.com/forum.php?mod=forumdisplay&fid=36&orderby=dateline&filter=author&page=4',
+         'http://www.meetqun.com/forum.php?mod=forumdisplay&fid=36&orderby=dateline&filter=author&page=3',
+         'http://www.meetqun.com/forum.php?mod=forumdisplay&fid=36&orderby=dateline&filter=author&page=2',
+         'http://www.meetqun.com/forum.php?mod=forumdisplay&fid=36&orderby=dateline&filter=author&page=1'
        ]
 
 
