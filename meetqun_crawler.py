@@ -11,7 +11,6 @@ urls = [ 'http://www.meetqun.com/forum.php?mod=forumdisplay&fid=36&orderby=datel
          'http://www.meetqun.com/forum.php?mod=forumdisplay&fid=36&orderby=dateline&filter=author&page=1'
        ]
 
-
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 headers = { 'User-Agent' : user_agent }
 
