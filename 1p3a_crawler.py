@@ -4,6 +4,7 @@ import urllib2
 import re 
 import datetime
 from datetime import timedelta
+from bs4 import BeautifulSoup
 
 urls = [ 'http://www.1point3acres.com/bbs/forum-145-3.html',
          'http://www.1point3acres.com/bbs/forum-145-2.html',
@@ -21,6 +22,7 @@ def process_single_post(url):
     response = urllib2.urlopen(request).read()
     content = response.decode('GBK','ignore').encode('UTF-8')
     #unicode(response,'GBK').encode('UTF-8')
+    soup = BeautifulSoup(content, 'html.parser')
 
     ''' extract title '''
     p = re.compile(r'<span id="thread_subject">(.*?)</span>')
