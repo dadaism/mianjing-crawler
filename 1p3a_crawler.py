@@ -11,7 +11,6 @@ urls = [ 'http://www.1point3acres.com/bbs/forum-145-3.html',
          'http://www.1point3acres.com/bbs/forum-145-1.html'
        ]
 
-
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 headers = { 'User-Agent' : user_agent }
 lastDayDateTime = datetime.datetime.now() - timedelta(days = 1)
