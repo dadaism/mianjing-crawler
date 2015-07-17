@@ -27,7 +27,7 @@ for url in urls:
     try:
         request = urllib2.Request(url, headers = headers)
         response = urllib2.urlopen(request).read()
-        content = unicode(response,'GBK').encode('UTF-8')
+        content = unicode(response,'GBK', errors='ignore').encode('UTF-8')
 
     except urllib2.URLError, e:
         if hasattr(e,"code"):
