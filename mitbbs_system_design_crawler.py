@@ -28,6 +28,25 @@ for url in urls:
         request = urllib2.Request(url, headers = headers)
         response = urllib2.urlopen(request).read()
         content = unicode(response,'GBK', errors='ignore').encode('UTF-8')
+        #content = response;
+    
+        ''' extract each post ''' 
+        soup = BeautifulSoup(content, 'html.parser')
+        items = soup.select('strong a')
+        
+        for item in items:
+            #print item
+            title = item.get_text()
+            link = "http://www.mitbbs.com"+item.get('href')
+            #print link
+            sd_pattern = re.compile('(面)|(题)|(on\s?site)|(interview)|(system)|(design)|(系统)|(设计)', re.IGNORECASE)
+            #sd_pattern = re.compile('总结', re.IGNORECASE)
+            if re.search(sd_pattern, title):
+                #print title
+                #print link
+                sd_process_single_post(link)
+                break
+
 
     except urllib2.URLError, e:
         if hasattr(e,"code"):
