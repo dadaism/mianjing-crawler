@@ -9,6 +9,9 @@ from bs4 import BeautifulSoup
 from random import randint
 from time import sleep
 
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 urls = [ 'http://www.mitbbs.com/bbsdoc1/JobHunting_301_0.html',
          'http://www.mitbbs.com/bbsdoc1/JobHunting_201_0.html',
          'http://www.mitbbs.com/bbsdoc1/JobHunting_101_0.html',
