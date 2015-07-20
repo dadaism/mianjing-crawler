@@ -23,6 +23,21 @@ user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 headers = { 'User-Agent' : user_agent }
     
 def sd_process_single_post(url):
+    request = urllib2.Request(url, headers = headers)
+    response = urllib2.urlopen(request).read()
+    content = unicode(response,'GBK', errors='ignore').encode('UTF-8')
+    
+    soup = BeautifulSoup(content, 'html.parser')
+
+    ''' extract date '''
+    #p = re.compile(r'[0-9]{2}:[0-9]{2}:[0-9]{2} [0-9]{4}', flags=re.DOTALL)
+    p = re.compile(r'[0-9]{4}年[0-9]{2}月[0-9]{2}日', flags=re.DOTALL)
+    dates = re.findall(p,content)
+    if not dates:
+        date = "xxxx-xx-xx"
+    else:
+        date = dates[0]
+    
 
     return
 
@@ -42,8 +57,7 @@ for url in urls:
             title = item.get_text()
             link = "http://www.mitbbs.com"+item.get('href')
             #print link
-            sd_pattern = re.compile('(面)|(题)|(on\s?site)|(interview)|(system)|(design)|(系统)|(设计)', re.IGNORECASE)
-            #sd_pattern = re.compile('总结', re.IGNORECASE)
+            #sd_pattern = re.compile('(面)|(题)|(on\s?site)|(interview)|(system)|(design)|(系统)|(设计)', re.IGNORECASE)
             if re.search(sd_pattern, title):
                 #print title
                 #print link
