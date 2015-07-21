@@ -37,6 +37,12 @@ def sd_process_single_post(url):
         date = "xxxx-xx-xx"
     else:
         date = dates[0]
+
+    ''' extract title '''
+    p = re.compile(r'<strong>同主题阅读：(.*?)</strong>')
+    titles = re.search(p, content)
+    title = titles.group(1)
+    #print title
     
 
     return
