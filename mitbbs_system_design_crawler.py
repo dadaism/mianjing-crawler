@@ -44,6 +44,16 @@ def sd_process_single_post(url):
     title = titles.group(1)
     #print title
     
+    ''' extract content '''
+    #first_content = soup.find('td', { 'class':'jiawenzhang-type'})
+    #print first_content
+
+    p = re.compile(r'<td\s+class="jiawenzhang-type">(.*?)--.*?</td>', flags=re.DOTALL)
+    items = re.search(p, content)
+    item = items.group(1)
+    item = re.sub(r'<[^>]*>', '', item)  # strip html tag
+    item = re.sub(r'&nbsp;', '', item)
+    first_text = '\n'.join( item.split('\n')[5:] ) # skip first 4 lines
 
     return
 
