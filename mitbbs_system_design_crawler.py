@@ -55,6 +55,20 @@ def sd_process_single_post(url):
     item = re.sub(r'&nbsp;', '', item)
     first_text = '\n'.join( item.split('\n')[5:] ) # skip first 4 lines
 
+    sd_pattern = re.compile('(system)|(design)|(系统)|(设计)''', re.IGNORECASE)
+    if re.search(sd_pattern, title) or re.search(sd_pattern, first_text):
+        print
+        print date
+        print 
+        print title
+        print 
+        print '原帖地址：<a href="'+url+'" target="_blank">mitbbs</a>'
+        print 
+        print first_text
+        print
+    
+    #print item
+    #print content
     return
 
 for url in urls:
