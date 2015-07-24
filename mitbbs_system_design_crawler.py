@@ -72,6 +72,8 @@ def sd_process_single_post(url):
     return
 
 for url in urls:
+    #sleep(randint(1,5))
+    sleep(0.1)
     try:
         request = urllib2.Request(url, headers = headers)
         response = urllib2.urlopen(request).read()
