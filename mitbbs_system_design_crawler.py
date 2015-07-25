@@ -71,7 +71,10 @@ def sd_process_single_post(url):
     #print content
     return
 
-for url in urls:
+for i in range(25201, 0, -100):
+    url = "http://www.mitbbs.com/bbsdoc1/JobHunting_"+str(i)+"_0.html"
+    #print url
+#for url in urls:
     #sleep(randint(1,5))
     sleep(0.1)
     try:
