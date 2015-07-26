@@ -96,7 +96,7 @@ for i in range(25201, 0, -100):
             title = item.get_text()
             link = "http://www.mitbbs.com"+item.get('href')
             #print link
-            #sd_pattern = re.compile('(面)|(题)|(on\s?site)|(interview)|(system)|(design)|(系统)|(设计)', re.IGNORECASE)
+            sd_pattern = re.compile('(面)|(题)|(on\s?site)|(interview)|(system)|(design)|(系统)|(设计)', re.IGNORECASE)
             if re.search(sd_pattern, title):
                 #print title
                 #print link
