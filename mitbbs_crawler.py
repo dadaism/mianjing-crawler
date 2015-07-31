@@ -5,7 +5,9 @@ import re
 import datetime
 from datetime import timedelta
 
-urls = [ 'http://www.mitbbs.com/bbsdoc1/JobHunting_301_0.html',
+urls = [ 
+         'http://www.mitbbs.com/bbsdoc1/JobHunting_401_0.html',
+         'http://www.mitbbs.com/bbsdoc1/JobHunting_301_0.html',
          'http://www.mitbbs.com/bbsdoc1/JobHunting_201_0.html',
          'http://www.mitbbs.com/bbsdoc1/JobHunting_101_0.html',
          'http://www.mitbbs.com/bbsdoc1/JobHunting_1_0.html'
@@ -71,7 +73,8 @@ for url in urls:
             date = re.search(p, item).group(1)
             #print date
 
-            mj_pattern = re.compile('(.*?面.*?\s)|(.*?on\s?site.*?\s)|(interview)', re.IGNORECASE)
+            #mj_pattern = re.compile('(.*?面.*?\s)|(.*?on\s?site.*?\s)|(interview)', re.IGNORECASE)
+            mj_pattern = re.compile('(面)|(on\s?site)|(interview)', re.IGNORECASE)
             tmp = re.findall(mj_pattern,title)
             #if tmp:
             #    print title, date
