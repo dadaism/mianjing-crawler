@@ -1,9 +1,13 @@
 # -*- coding:utf-8 -*-
+import sys
 import urllib
 import urllib2
 import re 
 import datetime
 from datetime import timedelta
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 urls = [ 
          'http://www.mitbbs.com/bbsdoc1/JobHunting_401_0.html',
@@ -20,7 +24,7 @@ headers = { 'User-Agent' : user_agent }
 def process_single_post(url):
     request = urllib2.Request(url, headers = headers)
     response = urllib2.urlopen(request).read()
-    content = unicode(response,'GBK').encode('UTF-8')
+    content = unicode(response,'GBK', errors='ignore').encode('UTF-8')
 
     ''' extract title '''
     p = re.compile(r'<strong>同主题阅读：(.*?)</strong>')
