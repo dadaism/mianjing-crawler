@@ -25,9 +25,9 @@ def process_single_post(url):
     request = urllib2.Request(url, headers = headers)
     response = urllib2.urlopen(request).read()
     content = unicode(response,'GBK', errors='ignore').encode('UTF-8')
-
     ''' extract title '''
-    p = re.compile(r'<strong>同主题阅读：(.*?)</strong>')
+    #p = re.compile(r'<strong>同主题阅读：(.*?)</strong>')
+    p = re.compile(r'<title>(.*?) - 未名空间\(mitbbs.com\)</title>')
     titles = re.search(p, content)
     title = titles.group(1)
     print title
