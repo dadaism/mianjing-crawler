@@ -5,6 +5,7 @@ import urllib2
 import re 
 import datetime
 from datetime import timedelta
+from time import sleep
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -30,6 +31,12 @@ def process_single_post(url):
     p = re.compile(r'<title>(.*?) - 未名空间\(mitbbs.com\)</title>')
     titles = re.search(p, content)
     title = titles.group(1)
+    title = re.sub(r'&amp;', '', title)  # strip nothing
+    title = re.sub(r'&nbsp;', '', title) # strip whitespace
+
+    title = re.sub(r'&gt;', '>', title) # convert >
+    title = re.sub(r'&lt;', '<', title) # convert <
+    title = re.sub(r'&quot;', '"', title) # convert "
     print title
     
     ''' extract content '''
@@ -37,8 +44,12 @@ def process_single_post(url):
     items = re.search(p, content)
     item = items.group(1)
     item = re.sub(r'<[^>]*>', '', item)  # strip html tag
-    item = re.sub(r'&nbsp;', '', item)
+    item = re.sub(r'&amp;', '', item)  # strip nothing
+    item = re.sub(r'&nbsp;', '', item) # strip whitespace
 
+    item = re.sub(r'&gt;', '>', item) # convert >
+    item = re.sub(r'&lt;', '<', item) # convert <
+    item = re.sub(r'&quot;', '"', item) # convert "
     print    
     print '原帖地址：<a href="'+url+'" target="_blank">mitbbs</a>'
     print 
